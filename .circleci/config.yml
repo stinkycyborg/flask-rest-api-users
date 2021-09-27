@@ -34,7 +34,7 @@ jobs:
       - checkout
       - sonarcloud/scan:
           sonar_token_variable_name: $SONARCLOUD_TOKEN 
-          cache_version: 3
+          cache_version: 4
       - python/install-packages:
           pkg-manager: pip
           # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
