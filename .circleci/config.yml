@@ -25,6 +25,7 @@ jobs:
     # Change the version below to your required version of python
     docker:
       - image: cimg/python:3.8
+      - image: docker:stable-git
     # Checkout the code as the first step. This is a dedicated CircleCI step.
     # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
     # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
@@ -43,3 +44,15 @@ jobs:
           name: Run tests
           # This assumes pytest is installed via the install-package step above
           command: pytest
+      - setup_remote_docker
+      - run:
+          name: Build image
+          command: docker build -t trivy-ci-test:${CIRCLE_SHA1}
+      - run:
+          name: Install trivy
+          command: |
+            apk add --update-cache --upgrade curl
+            curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin
+      - run:
+          name: Scan the local image with trivy
+          command: trivy --exit-code 0 --no-progress trivy-ci-test:${CIRCLE_SHA1}
