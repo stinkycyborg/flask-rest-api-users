@@ -7,6 +7,7 @@ orbs:
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
   python: circleci/python@1.2
   sonarcloud: sonarsource/sonarcloud@1.0.2
+  twilio: circleci/twilio@1.0.0
 
 workflows:
   sample:  # This is the name of the workflow, feel free to change it to better match your workflow.
@@ -55,3 +56,9 @@ jobs:
       - run:
           name: Scan the local image with trivy
           command: ./trivy --exit-code 0 --no-progress trivy-ci-test:${CIRCLE_SHA1}
+      - twilio/sendsms:
+          authtoken: $TWILIO_AUTHTOKEN 
+          sid: $TWILIO_SID
+          from: $TWILIO_FROM 
+          to: $TWILIO_TO 
+          body: $CIRCLE_REPOSITORY_URL pipeline completed. 
