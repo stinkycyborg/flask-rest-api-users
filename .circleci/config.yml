@@ -6,6 +6,7 @@ orbs:
   # so you dont have to copy and paste it everywhere.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/python
   python: circleci/python@1.2
+  sonarcloud: sonarsource/sonarcloud@1.0.0
 
 workflows:
   sample:  # This is the name of the workflow, feel free to change it to better match your workflow.
@@ -31,6 +32,7 @@ jobs:
     # CircleCI will report the results back to your VCS provider.
     steps:
       - checkout
+      - sonarcloud/scan
       - python/install-packages:
           pkg-manager: pip
           # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
