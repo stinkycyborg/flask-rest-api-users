@@ -33,8 +33,12 @@ jobs:
     steps:
       - checkout
       - sonarcloud/scan:
-          sonar_token_variable_name: $SONARCLOUD_TOKEN 
-          cache_version: 4
+          sonar_token_variable_name:
+            default: SONARCLOUD_TOKEN
+            description:
+              Name of the Environment variable where SonarCloud token is stored.
+            type: env_var_name
+          cache_version: 5
       - python/install-packages:
           pkg-manager: pip
           # app-dir: ~/project/package-directory/  # If you're requirements.txt isn't in the root directory.
