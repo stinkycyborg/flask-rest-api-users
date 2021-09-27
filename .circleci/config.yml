@@ -33,7 +33,7 @@ jobs:
     steps:
       - checkout
       - sonarcloud/scan:
-          sonar_token_variable_name: '$SONARCLOUD_TOKEN' 
+          sonar_token_variable_name: $SONARCLOUD_TOKEN 
           cache_version: 3
       - python/install-packages:
           pkg-manager: pip
