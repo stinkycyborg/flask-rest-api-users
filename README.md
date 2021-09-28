@@ -1,4 +1,4 @@
-[![<team3-fast-and-curious>](https://circleci.com/github/team3-fast-and-curious/flask-rest-api-users.svg?style=svg)](https://app.circleci.com/pipelines/github/team3-fast-and-curious)
+[![<team3-fast-and-curious>](https://circleci.com/gh/team3-fast-and-curious/flask-rest-api-users.svg?style=svg)](https://app.circleci.com/pipelines/github/team3-fast-and-curious)
 
 # flask-rest-api-users
 
